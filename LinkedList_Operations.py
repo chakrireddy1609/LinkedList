@@ -31,11 +31,75 @@ class LinkedList:
         newNode.next = self.head
         self.head = newNode
 
+    def append_after_node(self,prevNode,data):
+        if not prevNode:
+            return "Node does not exist in Linked List"
+        newNode = Node(data)
+        newNode.next = prevNode.next
+        prevNode.next = newNode
+
+    def delete(self,key):
+        currNode = self.head
+        if currNode and currNode.data == key:
+            self.head = currNode.next
+            currNode is None
+            return
+
+        prevNode = None
+        while currNode and currNode.data != key:
+            prevNode = currNode
+            currNode = currNode.next
+            if currNode is None:
+                return
+        prevNode.next = currNode.next
+        currNode is None
+
+    def delete_postion(self,pos):
+        currNode = self.head
+        if pos == 0:
+            self.head = currNode.next
+            currNode is None
+
+        count = 0
+        prevNode = None
+
+        while currNode and count != pos:
+            prevNode = currNode
+            currNode = currNode.next
+            count += 1
+
+        if currNode is None:
+            return
+        prevNode.next = currNode.next
+        currNode is None
+
+    def len_iterative(self):
+        currNode = self.head
+        count = 0
+        while currNode:
+            count += 1
+            currNode = currNode.next
+        return count
+
+    def len_recursive(self,node):
+        if node is None:
+            return 0
+        return 1+self.len_recursive(node.next)
+
 
 llist = LinkedList()
 llist.append("Chakri")
 llist.append("Anusha")
 llist.prepend("Aadriti")
 llist.print()
+llist.append_after_node(llist.head.next,"Reddy")
+llist.print()
+llist.delete("Reddy")
+llist.print()
+print(llist.len_iterative())
+print(llist.len_recursive(llist.head))
+
+
+
 
 
