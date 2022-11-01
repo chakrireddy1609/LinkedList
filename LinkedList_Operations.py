@@ -26,9 +26,16 @@ class LinkedList:
             print(currNode.data)
             currNode = currNode.next
 
+    def prepend(self,data):
+        newNode = Node(data)
+        newNode.next = self.head
+        self.head = newNode
+
 
 llist = LinkedList()
 llist.append("Chakri")
 llist.append("Anusha")
+llist.prepend("Aadriti")
 llist.print()
+
 
